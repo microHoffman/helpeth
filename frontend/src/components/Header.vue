@@ -1,27 +1,30 @@
 <template>
   <header class="header">
     <div class="logo">
-      <!-- Replace with your logo -->
-      <img src="src/../../graphics/Logo-portrait.svg" alt="Logo">
+      <router-link to="/">
+        <img :src="logo"/>
+      </router-link>
     </div>
     <nav class="nav">
-      <router-link to="/hello">Home</router-link>
+      <router-link to="/">Home</router-link>
       <router-link to="/docs">Docs</router-link>
     </nav>
   </header>
 </template>
-
+<script setup>
+import logo from '@/assets/helpETH.svg';
+</script>
 <style scoped>
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  background-color: #f0f0f0;
+  padding: 20px;
+  border-bottom: black 1px solid;
+  background-color: rgba(0,0,0,.5)
 }
 
 .logo img {
-  height: 40px;
 }
 
 .nav a {
