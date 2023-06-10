@@ -1,6 +1,8 @@
 # HelpETH
 Support NGOs with every transaction. When using any web3 app, donate to charities. Support impactful projects while swapping, lending, buying goods, and conducting transactions. Help it with HelpETH!
 
+![Frame 1](https://github.com/microHoffman/helpeth/assets/78812784/a3ccb823-8c7b-412f-95db-91e51fbfdebc)
+
 ## The problem it solves
 HelpETH enables users to support public goods effortlessly while engaging in their regular transactions. Whether you're swapping tokens or purchasing goods, HelpETH offers a convenient and secure way to donate to charity.
 
