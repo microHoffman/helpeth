@@ -147,6 +147,18 @@ function addAddress() {
         <div class="charity-list-div">
           <h1>Charity list</h1>
           <div>
+            <h3>Ukraine:</h3>
+            <div>
+              <a href="https://etherscan.io/address/0x165CD37b4C644C2921454429E7F9358d18A45e14">Ukraine</a>
+              <p>optimism: 0x165CD37b4C644C2921454429E7F9358d18A45e14</p>
+              <a href="https://www.notion.so/UkraineDAO-eth-Treasury-b080b59f794848fa8f6ac1b22575792c?pvs=21">Ukraine DAO</a>
+              <p>
+                optimism (little bit): <a href="https://etherscan.io/address/0x633b7218644b83d57d90e7299039ebab19698e9c">0x633b7218644b83d57d90e7299039ebab19698e9c</a>
+              </p>
+              <i>
+                Totally raised: {{ ukraineDaoBalance }} ETH
+              </i>
+            </div>
             <h3>Hunger and poverty:</h3>
             <div>
               <a href="https://www.heifer.org/give/other/digital-currency.html">Heifer International</a>
@@ -177,15 +189,6 @@ function addAddress() {
                 mainnet only: 0x338326660F32319E2B0Ad165fcF4a528c1994aCb
               </p>
             </div>
-            <h3>Ukraine:</h3>
-            <div>
-              <a href="https://etherscan.io/address/0x165CD37b4C644C2921454429E7F9358d18A45e14">Ukraine</a>
-              <p>optimism: 0x165CD37b4C644C2921454429E7F9358d18A45e14</p>
-              <a href="https://www.notion.so/UkraineDAO-eth-Treasury-b080b59f794848fa8f6ac1b22575792c?pvs=21">Ukraine DAO</a>
-              <p>
-                optimism (little bit): <a href="https://etherscan.io/address/0x633b7218644b83d57d90e7299039ebab19698e9c">0x633b7218644b83d57d90e7299039ebab19698e9c</a>
-              </p>
-            </div>
             <h3>Iran:</h3>
             <div>
               <a href="https://www.iranunchained.com/">Iran Unchained</a>
@@ -200,11 +203,20 @@ function addAddress() {
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { checkBalance } from '../rpc/get_balance'
+
 const selectedSection = ref('')
+const ukraineDaoBalance = ref()
+
 function selectedSectionChanged(section) {
   this.selectedSection = section
 }
+
+onMounted(async () => {
+  // Ukrainian DAO Optimism address
+  ukraineDaoBalance.value = await checkBalance("0x165CD37b4C644C2921454429E7F9358d18A45e14")
+})
 </script>
 
 <style scoped>
