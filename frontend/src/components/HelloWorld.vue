@@ -1,4 +1,5 @@
 <template>
+  <div class="main">
   <div class="form-container">
     <div class="logo">
       <img :src="logo"/>
@@ -21,6 +22,7 @@
       <button @click="submitForm" class="submit-button">Confirm</button>
     </div>
   </div>
+  </div>
 </template>
 <script setup>
 import logo from '@/assets/helpETH.svg';
@@ -36,6 +38,14 @@ const submitForm = () => {
 }
 </script>
 <style scoped>
+template {
+  display: flex;
+  justify-content: center;
+}
+.main{
+  width: 100vw;
+  height: 88vh;
+}
 .submit-button{
   display: flex;
   flex-direction: row;
@@ -142,7 +152,6 @@ const submitForm = () => {
   align-items: center;
   padding: 12px 16px;
   gap: 83px;
-  color: white;
   width: 164px;
   height: 41px;
 

@@ -18,7 +18,6 @@ export default {
 <style>
 .background {
   background: linear-gradient(116.82deg, #FFED33 0%, #00AFE0 33.33%, #6276B8 66.67%, #EE7663 100%);
-  height: 100vh;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

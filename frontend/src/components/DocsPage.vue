@@ -2,42 +2,43 @@
   <div class="d-flex">
     <nav>
       <ul>
-        <li><a href="#section1">Introductions</a></li>
-        <li><a href="#section2">Examples</a></li>
-        <li><a href="#section3">Dev info</a></li>
+        <li v-if="selectedSection === 'section1'" class="active"><a v-on:click="selectedSectionChanged('section1')" href="#section1">Introductions</a></li>
+        <li v-else><a v-on:click="selectedSectionChanged('section1')" href="#section1">Introductions</a></li>
+        <li v-if="selectedSection === 'section2'" class="active"><a v-on:click="selectedSectionChanged('section2')" href="#section2">Examples</a></li>
+        <li v-else><a v-on:click="selectedSectionChanged('section2')" href="#section2">Examples</a></li>
+        <li v-if="selectedSection === 'section3'" class="active"><a v-on:click="selectedSectionChanged('section3')" href="#section3">Dev info</a></li>
+        <li v-else><a v-on:click="selectedSectionChanged('section3')" href="#section3">Dev info</a></li>
       </ul>
     </nav>
     <div>
       <section id="section1">
-        <h1 class="text-left">Introduction</h1>
-        <div class="text-left">
-          <p>
-            HelpETH enables users to support public goods effortlessly while engaging in their regular transactions. Whether you're swapping tokens or purchasing goods, HelpETH offers a convenient and secure way to donate to charity.
-          </p>
-          <p>
-            The primary use case of HelpETH is integrating philanthropy into everyday activities. Users can contribute to charitable causes simply by performing transactions. Whether purchasing items online or participating in decentralized exchanges, HelpETH empowers users to make a positive impact effortlessly.
-          </p>
-          <p>
-            HelpETH integrates easily into web3 applications with a few lines of code. Apps can import HelpETH and direct donations to a charity address of their choice, whether permanent or temporary for events like Earth Day.
-          </p>
-          <p>
-            Users can add $2.5 USD or a custom amount to each transaction, automatically supporting public goods without a second transaction. This aligns economic decisions with values.
-          </p>
-          <p>
-            HelpETH ensures secure and transparent donations deployed on Optimism. Donors can verify donation destinations immediately, boosting confidence and encouraging philanthropy.
-          </p>
-          <p>
-            In summary, HelpETH revolutionizes philanthropy by integrating it into everyday transactions. Supporting public goods while swapping tokens or engaging in web3 activities allows users to make a tangible difference. HelpETH empowers individuals to align their financial decisions with their values, fostering a culture of giving and accessible positive change.
-            Challenges we ran into
-          </p>
-          <p>
-            We wanted to implement account abstraction to simplify transactions. We have been searching for a smooth-working solution, and thus, we extended Pimlico's ERC20 Paymaster contract. This extension enables the remaining amount, after paying for gas, to be sent to a user different from the transaction sender.
-          </p>
+        <div class="introduction-div">
+          <h1 class="text-left">Introduction</h1>
+          <div class="text-left">
+            <p>
+              With HelpETH, you can easily implement opt-in donations into your web3 app. Choose a charity from our list or select one of your choice.
+            </p>
+            <p>
+              With the implementation of EIP-4337, users of your app can opt-in for a donation by simply ticking a checkbox, without the need to perform another transaction. Donations and fees can be covered with DAI.
+            </p>
+          </div>
         </div>
       </section>
       <section id="section2">
-        <h1>Examples</h1>
-        <pre class="text-left">
+        <div class="examples-div">
+          <h1>Examples</h1>
+          <div>
+            <div>
+              <pre class="text-left">
+                <code>
+
+                </code>
+              </pre>
+            </div>
+            <div></div>
+          </div>
+          <div></div>
+          <pre class="text-left">
           <code>
           &lt;nav&gt;
             &lt;ul&gt;
@@ -48,6 +49,7 @@
           &lt;/nav&gt;
         </code>
         </pre>
+        </div>
       </section>
       <section id="section3">
         <h1>Dev info</h1>
@@ -57,7 +59,11 @@
 </template>
 
 <script setup>
-
+import { ref } from 'vue';
+const selectedSection = ref('')
+function selectedSectionChanged(section) {
+  this.selectedSection = section
+}
 </script>
 
 <style scoped>
@@ -75,6 +81,9 @@ ul {
   padding-top: 1.5rem;
   position: sticky;
   top: 0;
+  margin: 2rem;
+  bottom:20px;
+  z-index:999;
 }
 
 .d-flex {
@@ -87,5 +96,39 @@ ul {
 
 section {
   padding: 3rem 10rem 3rem 5rem;
+}
+
+.introduction-div {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 2rem 3rem;
+}
+
+.examples-div {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  padding: 2rem 3rem;
+}
+
+li {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5);
+  border-radius: 28px;
+  padding: 0.5rem 1rem;
+}
+
+li:hover {
+  background: blueviolet;
+}
+
+a {
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+nav li.active {
+  background-color: rgba(0,0,0,.5)
 }
 </style>
