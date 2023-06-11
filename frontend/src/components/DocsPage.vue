@@ -214,7 +214,7 @@ nav {
   list-style-type: none;
 }
 
-ul, .menu-div {
+ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
