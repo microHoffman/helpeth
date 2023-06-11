@@ -2,7 +2,7 @@
   <div class="main">
   <div class="form-container">
     <div class="logo">
-      <img :src="logo"/>
+      <img :src="logo.default"/>
     </div>
     <div class="form-field">
       <label for="address" class="label">Address</label>
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script setup>
-import logo from '@/assets/helpETH.svg';
+import * as logo from '../assets/helpETH.svg';
 import { ref } from 'vue';
 
 const addressValue = ref('');
