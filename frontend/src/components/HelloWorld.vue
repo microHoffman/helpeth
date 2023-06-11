@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-  <div class="form-container">
+    <div class="form-container">
     <div class="logo">
       <img :src="logo.default"/>
     </div>
@@ -9,40 +9,146 @@
       <input v-model="addressValue" id="address" type="text" placeholder="Enter your address..." class="input-field">
     </div>
     <div class="form-field">
-      <label for="amount" class="label">Amount</label>
+      <label for="amount" class="label">Amount (USD)</label>
       <input v-model="amountValue" id="amount" type="number" placeholder="Enter the amount" class="input-field-amount">
     </div>
     <div class="transaction-footer">
-      <div style="align-items: center">
-        <label class="checkbox-label">
-          <input v-model="checkboxValue" type="checkbox" class="checkbox">
-          I want to donate to charity ($2.5)
-        </label>
+      <div style="display: flex; flex-direction: column">
+        <div style="align-items: center">
+          <label class="checkbox-label">
+            <input v-model="checkboxValue" type="checkbox" class="checkbox">
+            I want to donate to charity ($2.5)
+          </label>
+        </div>
+        <div v-if="checkboxValue === true" class="charities">
+          <div :class="['charity_card', { 'selected': selectedCharity === 'Grace' }]" @click="selectCharity('Grace')">
+            <div class="charity_card_header">
+              <div style="width: 100%; justify-content: center; align-items: center" class="charity_card_header_logo">
+                <img class="charity_card_header_logo" :src="grace.default"/>
+              </div>
+              <div class="charity_card_header_name">
+                <p>Grace</p>
+              </div>
+            </div>
+          </div>
+          <div :class="['charity_card', { 'selected': selectedCharity === 'Heifer' }]" @click="selectCharity('Heifer')">
+            <div class="charity_card_header">
+              <div style="width: 100%; justify-content: center; align-items: center" class="charity_card_header_logo">
+                <img class="charity_card_header_logo" :src="heifer.default"/>
+              </div>
+              <div class="charity_card_header_name">
+                <p>Heifer</p>
+              </div>
+            </div>
+          </div>
+          <div :class="['charity_card', { 'selected': selectedCharity === 'UkraineDAO' }]" @click="selectCharity('UkraineDAO')">
+            <div class="charity_card_header">
+              <div style="width: 100%; justify-content: center; align-items: center" class="charity_card_header_logo">
+                <img class="charity_card_header_logo" :src="ukraine.default"/>
+              </div>
+              <div class="charity_card_header_name">
+                <p>UkraineDAO</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <button @click="submitForm" class="submit-button">Confirm</button>
     </div>
   </div>
+    <div v-if="isTransactionSuccess" class="share_lens">
+      <a :href="lensterLink" target="_blank">
+      <img :src="lenster.default"/>
+      </a>
+    </div>
   </div>
 </template>
 <script setup>
 import * as logo from '../assets/helpETH.svg';
-import { ref } from 'vue';
-
+import * as lenster from '../assets/lenster.svg';
+import * as grace from '../assets/grace.png';
+import * as heifer from '../assets/heifer.svg';
+import * as ukraine from '../assets/ukraineDAO.png';
+import {computed, ref} from 'vue';
 const addressValue = ref('');
+const amountValue = ref(0);
 const checkboxValue = ref(false);
-
-const submitForm = () => {
-  // Handle form submission logic here
-  console.log('Input Value:', addressValue.value);
-  console.log('Checkbox Value:', checkboxValue.value);
+const donatedAmount = ref(2.5);
+const isTransactionSuccess = ref(false);
+const lensterPostContent = computed(() => encodeURIComponent(`I've just donated ${donatedAmount.value} DAI to charity using HelpETH!}`))
+const lensterLink = computed(() => `https://lenster.xyz/?text=${lensterPostContent.value}`)
+const selectedCharity = ref('')
+const selectCharity = (charity) => {
+  selectedCharity.value = charity
+  console.log(selectedCharity.value)
 }
+const submitForm = () => {
+  if (checkboxValue.value === true){
+    alert(`You've just sent ${amountValue.value} to ${addressValue.value} and also donated 2.5 USD to ${selectedCharity.value}! Gas fee was 2 USD.`)
+  }
+  else {
+    alert(`You've just sent ${amountValue.value} to ${addressValue.value}! Gas fee was 2 USD.`)
+  }
+
+  isTransactionSuccess.value = true
+  setTimeout(() => {
+    isTransactionSuccess.value = false
+  }, 10000)
+}
+
 </script>
 <style scoped>
-template {
+.charities{
+  margin-top: 1rem;
   display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.charity_card {
+
+  /* Auto layout */
+  width: 7rem;
+  height: 7rem;
   justify-content: center;
+  align-items: center;
+
+  background: #E6E6E6;
+  border: 1px solid #CECECE;
+  border-radius: 4px;
+}
+.charity_card:hover{
+  cursor: pointer;
+  background: #76c4d5;
+}
+.selected {
+  background: #76c4d5;
+}
+.charity_card_header_logo{
+  width: 40px;
+  height: 40px;
+}
+.share_lens{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+
+  top: 118px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+}
+.share_lens:hover{
+  cursor: pointer;
+  background: #76c4d5;
 }
 .main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 88vh;
 }
@@ -93,8 +199,6 @@ template {
   align-items: flex-start;
   padding: 24px;
   gap: 1rem;
-
-  position: absolute;
   width: 545px;
   left: calc(50% - 545px/2);
   top: 118px;
