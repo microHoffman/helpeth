@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@alchemy/aa-core": "^0.1.0-alpha.1",
     "@wagmi/core": "^1.1.1",
     "@web3modal/ethereum": "^2.4.5",
     "@web3modal/html": "^2.4.5",

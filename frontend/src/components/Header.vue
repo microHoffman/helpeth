@@ -21,26 +21,14 @@
 <script setup>
 import * as logo from '../assets/helpETH.svg';
 import { ref } from 'vue';
-import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { Web3Modal } from '@web3modal/html'
-import { configureChains, createConfig } from '@wagmi/core'
-import { goerli } from '@wagmi/core/chains'
+import useWeb3 from '../components/useWeb3'
 
-const chains = [goerli]
-const projectId = '76fc158f46ea16d92de64fee8ecc2622'
-
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 1, chains }),
-  publicClient
-})
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
-const web3modal = new Web3Modal({ projectId }, ethereumClient)
 const selectedPage = ref('')
+
 function selectedPageChanged(page) {
   this.selectedPage = page
 }
+
 function connectWallet() {
   web3modal.openModal()
 }
