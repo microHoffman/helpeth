@@ -21,7 +21,10 @@
 <script setup>
 import * as logo from '../assets/helpETH.svg';
 import { ref } from 'vue';
-import useWeb3 from '../components/useWeb3'
+import useWeb3 from '../composables/useWeb3'
+import { SimpleSmartContractAccount } from "@alchemy/aa-core";
+
+const { web3modal, ethereumClient, erc4337Provider, ENTRY_POINT_ADDRESS, goerli } = useWeb3()
 
 const selectedPage = ref('')
 
@@ -29,9 +32,23 @@ function selectedPageChanged(page) {
   this.selectedPage = page
 }
 
-function connectWallet() {
+function resolveAfter5Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 5000);
+  });
+}
+
+async function connectWallet() {
   web3modal.openModal()
 }
+
+setInterval(async () => {
+  console.log('ethereumClient', ethereumClient)
+  console.log('erc4337Provider', erc4337Provider)
+  console.log('ethereumClient.getAccount()', await ethereumClient.getAccount())
+}, 5000)
 </script>
 <style scoped>
 .header {

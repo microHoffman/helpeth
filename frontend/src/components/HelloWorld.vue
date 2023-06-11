@@ -27,6 +27,9 @@
 <script setup>
 import * as logo from '../assets/helpETH.svg';
 import { ref } from 'vue';
+import useWeb3 from '../composables/useWeb3';
+
+const { erc4337Provider } = useWeb3()
 
 const addressValue = ref('');
 const checkboxValue = ref(false);
@@ -35,6 +38,15 @@ const submitForm = () => {
   // Handle form submission logic here
   console.log('Input Value:', addressValue.value);
   console.log('Checkbox Value:', checkboxValue.value);
+
+  const { hash } = erc4337Provider.sendUserOperation(
+    {
+      target: addressValue.value,
+      data: null,
+      value: 0n,
+    }
+  );
+  console.log(hash)
 
   // TODO
   /*
