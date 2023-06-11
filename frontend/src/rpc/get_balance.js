@@ -2,13 +2,13 @@ const { ethers } = require("ethers");
 
 async function checkBalance(addressToCheck) {
   // Provider URL
-  const providerUrl = "https://rpc.eu-north-1.gateway.fm/v4/optimism/non-archival/goerli";
+  const providerUrl = "https://rpc.eu-north-1.gateway.fm/v4/optimism/non-archival/mainnet";
 
   // Set up the provider
   const provider = new ethers.providers.JsonRpcProvider(providerUrl);
 
   // API Key
-  const apiKey = "SynaLfBMMV8AF0WYDI327Wczeyf27TOT.cdcwqDiDFsNfrj2O";
+  const apiKey = "WnCJpQUQdNON_qtq5zUMGATXnS7VqWn_.wuceFon4Mrbbk6Rd";
 
   // Ethereum address to check the balance
   const address = addressToCheck;
@@ -23,4 +23,5 @@ async function checkBalance(addressToCheck) {
   }
 }
 
-checkBalance("0xfa28de39d5C1AA56AbB7bd07B7770c5ACfF0C34f");
+// Ukrainian DAO Optimism address
+checkBalance("0x165CD37b4C644C2921454429E7F9358d18A45e14");
