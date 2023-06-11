@@ -11,7 +11,7 @@ HelpETH ensures secure and transparent donations deployed on Optimism. We also m
 In the future, we’d like to see an ‘Aave Impact Fund’ included in our list of verified addresses. It would be a lending protocol that donors could support on the supply side, and the interest on the loans would be donated.
 
 ## The technical part
-- Forked Pimlico's Paymaster contracts and overridden the function responsible for sending the remaining amount after paying the gas fee.
+- Forked [Pimlico's Paymaster contracts](https://github.com/pimlicolabs/erc20-paymaster-contracts/blob/master/src/PimlicoERC20Paymaster.sol) and overridden the function responsible for sending the remaining amount after paying the gas fee.
 - This modification allowed the option to send the remaining amount to a different user (charity) than the original transaction sender.
 - Initially we’ve also considered extending the ERC20 standard to split the amount among multiple recipients but realized it would limit usability with well-known tokens like DAI and WETH.
 - Finally we’ve decided to opt in for an account abstraction approach, enabling users to use existing tokens and pay the gas fee in the token they are sending (e.g., DAI).
