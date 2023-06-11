@@ -14,7 +14,7 @@
       </nav>
     </div>
     <div>
-      <button @click="connectWallet()">Connect Wallet</button>
+      <button class="connect-wallet-btn" @click="connectWallet()">Connect Wallet</button>
     </div>
   </header>
 </template>
@@ -76,9 +76,18 @@ function connectWallet() {
 button {
   padding: 0.5rem 1rem;
   background: #76c4d5;
+  border-radius: 24px;
 }
 
 .active {
   background: #e2f0f3;
+}
+
+.connect-wallet-btn {
+  border-radius: 24px;
+}
+
+.connect-wallet-btn:hover {
+  background: #6ab3c3;
 }
 </style>
