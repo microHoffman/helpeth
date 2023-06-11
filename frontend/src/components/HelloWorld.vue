@@ -1,58 +1,173 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="main">
+  <div class="form-container">
+    <div class="logo">
+      <img :src="logo.default"/>
+    </div>
+    <div class="form-field">
+      <label for="address" class="label">Address</label>
+      <input v-model="addressValue" id="address" type="text" placeholder="Enter your address..." class="input-field">
+    </div>
+    <div class="form-field">
+      <label for="amount" class="label">Amount</label>
+      <input v-model="amountValue" id="amount" type="number" placeholder="Enter the amount" class="input-field-amount">
+    </div>
+    <div class="transaction-footer">
+      <div style="align-items: center">
+        <label class="checkbox-label">
+          <input v-model="checkboxValue" type="checkbox" class="checkbox">
+          I want to donate to charity ($2.5)
+        </label>
+      </div>
+      <button @click="submitForm" class="submit-button">Confirm</button>
+    </div>
+  </div>
   </div>
 </template>
+<script setup>
+import * as logo from '../assets/helpETH.svg';
+import { ref } from 'vue';
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+const addressValue = ref('');
+const checkboxValue = ref(false);
+
+const submitForm = () => {
+  // Handle form submission logic here
+  console.log('Input Value:', addressValue.value);
+  console.log('Checkbox Value:', checkboxValue.value);
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+template {
+  display: flex;
+  justify-content: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.main{
+  width: 100vw;
+  height: 88vh;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.submit-button{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 24px;
+  gap: 8px;
+
+  width: 101px;
+  height: 41px;
+
+  background: #00AFE0;
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
 }
-a {
-  color: #42b983;
+.transaction-footer{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
+.checkbox{
+  align-items: flex-start;
+  box-sizing: border-box;
+
+  width: 24px;
+  height: 24px;
+
+  background: #E6E6E6;
+  border: 1px solid #CECECE;
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 1rem;
+
+  position: absolute;
+  width: 545px;
+  left: calc(50% - 545px/2);
+  top: 118px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+}
+
+.label {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.input-field{
+  /* Frame 24 */
+  box-sizing: border-box;
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 16px;
+  gap: 8px;
+
+  width: 497px;
+  height: 41px;
+
+  background: #E6E6E6;
+  border: 1px solid #CECECE;
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.input-field-amount{
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 83px;
+  width: 164px;
+  height: 41px;
+
+  background: #E6E6E6;
+  border: 1px solid #CECECE;
+  border-radius: 4px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.logo{
+  width: 100%;
+  justify-content: center;
+}
+
 </style>
